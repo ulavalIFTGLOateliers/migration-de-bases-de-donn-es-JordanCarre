@@ -12,6 +12,7 @@ class Database:
             Chargez les variables d'environnement de votre fichier .env, puis complétez les lignes 15 à 19 afin de récupérer les valeurs de ces variables
         """
         load_dotenv()
+        '''
         #Cette manière de faire est utilisée car load_dotenv() ne fonctionnait pas adéquatement sur ma machine locale.
         env_file_path = "variables.env"
         with open(env_file_path, "r") as file:
@@ -24,7 +25,13 @@ class Database:
         self.database = os.getenv("DATABASE")
         self.user = os.getenv("USER")
         self.password = os.getenv("PASSWORD")
+        '''
 
+        self.host = os.environ.get("HOST")
+        self.port = int(os.environ.get("PORT"))
+        self.database = os.environ.get("DATABASE")
+        self.user = os.environ.get("USER")
+        self.password = os.environ.get("PASSWORD")
         self._open_sql_connection()
 
         self.migration_counter = 0
